@@ -12,7 +12,9 @@ namespace DTO.HotelDto
         public long CityID { get; set; }
         public City City { get; set; }
         public long? HotelСhainId { get; set; }
-        public HotelСhain? HotelСhain { get; set; }
-        public long IdMedia { get; set; }
+        public HotelChain? HotelСhain { get; set; }
+        public int Stars { get; set; }
+        public string Address { get; set; }
     }
+    
 }

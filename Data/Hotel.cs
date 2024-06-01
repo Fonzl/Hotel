@@ -10,12 +10,12 @@ public class Hotel
     public string Name { get; set; }
     public string Info { get; set; }
     public long CityId { get; set; }
-    public  double Rating { get; set; }
     public City City { get; set; }
     public long? HotelСhainId {  get; set; }
-    public HotelСhain? HotelСhain { get; set; }
-    public long IdMedia { get; set; }
-    public List<HotelRoom> HotelRooms { get; set; } = [];
+    public HotelChain? HotelChain { get; set; }
+    public List<HotelRoom> HotelRooms { get; set; } 
+    public int  Stars { get; set; }
+    public string Address { get; set; }
 }
 public class HotelMap
 {

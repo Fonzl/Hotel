@@ -1,4 +1,5 @@
 using Repository.RepositoryCountry;
+using Microsoft.AspNetCore.Identity;
 using Service.ServiceCountry;
 using Repository.RepositoryCity;
 using Service.ServiceCity;
@@ -10,6 +11,12 @@ using Repository.RepositoryHotelRoom;
 using Service.ServiceHotelRoom;
 using Repository.RepositoryTypeOfNumber;
 using Service.ServiceTypeOfNumber;
+using Repository;
+using Microsoft.EntityFrameworkCore;
+using Service.UserService;
+using Repository.RepositoryUser;
+using Repository.JwtRepository;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,14 +27,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+//var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+builder.Services.AddDbContext<ApplicationContext>(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 builder.Services.AddScoped(typeof(ICountryRepository), typeof(CountryRepository));
 builder.Services.AddTransient<ICountryService, CountryService>();
 builder.Services.AddScoped(typeof(ICityRepository), typeof(CityRepository));
@@ -40,7 +51,27 @@ builder.Services.AddScoped(typeof(IRepositoryHotelRoom), typeof(RepositoryHotelR
 builder.Services.AddTransient<IServiceHotelRoom, ServiceHotelRoom>();
 builder.Services.AddScoped(typeof(IRepositoryTypeOfNumber), typeof(RepositoryTypeOfNumber));
 builder.Services.AddTransient<IServiceTypeOfNumber, ServiceTypeOfNumber>();
+builder.Services.AddScoped(typeof(IRepositoryUser), typeof(RepositoryUser));
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddScoped(typeof(IJwtRepository), typeof(JwtRepository));
 
+builder.Services.AddIdentityCore<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+}).AddEntityFrameworkStores<ApplicationContext>();
+var app = builder.Build();
+app.UseDeveloperExceptionPage();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

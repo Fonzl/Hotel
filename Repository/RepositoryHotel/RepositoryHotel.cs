@@ -20,7 +20,10 @@ namespace Repository.RepositoryHotel
                 {
                     Id = hotel.Id,
                     Name = hotel.Name,
-                    Info = hotel.Info
+                    Info = hotel.Info,
+                    Stars = hotel.Stars,
+                    Address = hotel.Address,
+                    
                 };
                 return hotelDto;
 
@@ -47,7 +50,9 @@ namespace Repository.RepositoryHotel
                 var hotel = new Hotel()
                 {
                     Name = dto.Name,
-                    Info = dto.Info
+                    Info = dto.Info,
+                    Stars = dto.Stars,
+                    Address = dto.Address,
                 };
                 _hotels.Add(hotel);
                 context.SaveChanges();
@@ -59,6 +64,8 @@ namespace Repository.RepositoryHotel
                 
                 hotel.Name = dto.Name;
                 hotel.Info = dto.Info;
+                hotel.Stars = dto.Stars;
+                hotel.Address = dto.Address;
 
                 _hotels.Update(hotel);
                 context.SaveChanges();

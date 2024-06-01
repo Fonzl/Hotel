@@ -26,7 +26,7 @@ namespace Service.ServiceHotel
         }
        public void DeleteHotel(long id)
         {
-          _hotelRepository.Delete(id);
+            _hotelRepository.Delete(id);
         }
     }
 }

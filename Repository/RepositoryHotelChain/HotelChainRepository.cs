@@ -10,7 +10,7 @@ namespace Repository.RepositoryHotelСhain
     public class HotelChainRepository(ApplicationContext context) : IHotelChainRepository
     {
         private readonly ApplicationContext _context = context;
-        private DbSet<HotelСhain> _hotelchains = context.Set<HotelСhain>();
+        private DbSet<HotelChain> _hotelchains = context.Set<HotelChain>();
         public HotelChainDto Get(long id)
         {
             var hotelchain = _hotelchains.SingleOrDefault(h => h.Id == id);
@@ -40,7 +40,7 @@ namespace Repository.RepositoryHotelСhain
         }
        public void Insert(CreateHotelChainDto dto)
         {
-            var hotelСhain = new HotelСhain()
+            var hotelСhain = new HotelChain()
             { 
               Name = dto.Name,
               OwnerName = dto.OwnerName,

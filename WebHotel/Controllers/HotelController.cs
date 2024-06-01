@@ -16,9 +16,9 @@ namespace WebHotel.Controllers
             var hotels = hotelService.GetHotels();
             return Json(hotels);
         }
-        [Route ("{id}")]
+        [Route("{id}")]
         [HttpGet]
-        public JsonResult PostHotel(long id) 
+        public JsonResult PostHotel(long id)
         {
             var hotel = hotelService.GetHotel(id);
             return Json(hotel);

@@ -6,7 +6,7 @@ using Service.ServiceHotelChain;
 namespace WebHotel.Controllers
 {
     [ApiController]
-    [Route("hotel")]
+    [Route("hotelchain")]
     public class HotelChainController(IServiceHotelChain serviceHotelChain) : Controller
     {
         [HttpGet]
