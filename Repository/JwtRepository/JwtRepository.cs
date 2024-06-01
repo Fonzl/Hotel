@@ -46,10 +46,10 @@ public class JwtRepository(IConfiguration configuration) : IJwtRepository
         SecurityAlgorithms.HmacSha256
     );
 
-    public AuthSignInResponse CreateToken(Task<IdentityUser> user)
+    public AuthSignInResponse CreateToken(IdentityUser user)
     {
         var expiration = DateTime.UtcNow.AddMinutes(EXPIRATION_MINUTES);
-
+        
         var token = CreateJwtToken(
             CreateClaims(user),
             CreateSigningCredentials(),

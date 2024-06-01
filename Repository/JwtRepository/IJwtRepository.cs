@@ -8,5 +8,5 @@ namespace Repository.JwtRepository;
 
 public interface IJwtRepository
 {
-    AuthSignInResponse CreateToken(Task<IdentityUser> user);
+    AuthSignInResponse CreateToken(IdentityUser user);
 }

@@ -16,6 +16,9 @@ using Microsoft.EntityFrameworkCore;
 using Service.UserService;
 using Repository.RepositoryUser;
 using Repository.JwtRepository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using WebHotel;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -65,7 +68,8 @@ builder.Services.AddIdentityCore<IdentityUser>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<ApplicationContext>();
-var app = builder.Build();
+
+  var app = builder.Build();
 app.UseDeveloperExceptionPage();
 if (app.Environment.IsDevelopment())
 {
