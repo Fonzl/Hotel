@@ -43,6 +43,7 @@ public class CityRepository(ApplicationContext context) : ICityRepository
     {
         var city = new City()
         {
+      
             Name = dto.Name,
             Info = dto.Info
         };
@@ -53,7 +54,7 @@ public class CityRepository(ApplicationContext context) : ICityRepository
     {
         var city = _cities.SingleOrDefault(x => x.Id == dto.Id);
         if (city == null) return;
-        city.Id = dto.Id;
+       
         city.Name = dto.Name;
         city.Info = dto.Info;
        

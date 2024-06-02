@@ -8,12 +8,12 @@ namespace DTO.HotelRoomDto
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public long NumberOfBeds { get; set; }
+        public int NumberOfBeds { get; set; }
         public string Info { get; set; }
         public long PricePerNight { get; set; }
         public long HotelId { get; set; }
-        public Hotel Hotel { get; set; }
+        public HotelDto.HotelDto Hotel { get; set; }
         public long TypeOfNumberId { get; set; }
-        public TypeOfNumber TypeOfNumber { get; set; }
+        public TypeOfNumberDto.TypeOfNumberDto TypeOfNumber { get; set; }
     }
 }

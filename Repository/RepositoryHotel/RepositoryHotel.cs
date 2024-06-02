@@ -40,7 +40,8 @@ namespace Repository.RepositoryHotel
                     {
                         Id = hotel.Id,
                         Name = hotel.Name,
-                        Info = hotel.Info
+                        Stars = hotel.Stars,
+                        Address = hotel.Address,
                     });
                 }
                 return hotelsDto;

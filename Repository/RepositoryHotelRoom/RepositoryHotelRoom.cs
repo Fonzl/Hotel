@@ -35,7 +35,6 @@ namespace Repository.RepositoryHotelRoom
                 {
                     Id = hotelRoom.Id,
                     Name = hotelRoom.Name,
-                    Info = hotelRoom.Info,
                     NumberOfBeds = hotelRoom.NumberOfBeds,
                     PricePerNight = hotelRoom.PricePerNight
                 }); 
@@ -47,7 +46,9 @@ namespace Repository.RepositoryHotelRoom
             var hotelroom = new HotelRoom()
             {
                 Name = dto.Name,
-                Info = dto.Info
+                Info = dto.Info,
+                NumberOfBeds = dto.NumberOfBeds,
+                PricePerNight = dto.PricePerNight
             };
             _hotelrooms.Add(hotelroom);
             context.SaveChanges();
@@ -59,7 +60,8 @@ namespace Repository.RepositoryHotelRoom
             
             hotelroom.Name = dto.Name;
             hotelroom.Info = dto.Info;
-
+            hotelroom.NumberOfBeds = dto.NumberOfBeds;
+            hotelroom.PricePerNight = dto.PricePerNight;
             _hotelrooms.Update(hotelroom);
             context.SaveChanges();
 
