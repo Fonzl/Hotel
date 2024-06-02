@@ -1,8 +1,10 @@
 using DTO.AuthDto;
 using DTO.UserDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Repository.JwtRepository;
 using Service.UserService;
@@ -18,9 +20,9 @@ namespace BookAppAPI.Controllers;
 [Route("users")]
 public class UserController(IUserService userService, IJwtRepository jwtRepository, UserManager<IdentityUser> userManager) : Controller
 {
-    private readonly UserManager<IdentityUser> _userManager = userManager;    
+    private readonly UserManager<IdentityUser> _userManager = userManager;
 
-
+  
     [HttpGet]
     public async Task<JsonResult> GetUsers()
     {
@@ -66,6 +68,12 @@ public class UserController(IUserService userService, IJwtRepository jwtReposito
         var token = jwtRepository.CreateToken(user);
         return Ok(token);
     }
+    //[Authorize]
+    //[HttpGet]
+    //public async Task<ActionResult<IEnumerable<BodyType>>> GetBodyTypes()
+    //{
+    //    return await _context.BodyTypes.ToListAsync();
+    //}
     //[HttpPost("/token")]
     //public IActionResult Token(string username, string password)
     //{

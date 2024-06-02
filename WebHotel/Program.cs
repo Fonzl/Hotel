@@ -19,7 +19,9 @@ using Repository.JwtRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using WebHotel;
-
+using Microsoft.Extensions.Configuration;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,8 +70,23 @@ builder.Services.AddIdentityCore<IdentityUser>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<ApplicationContext>();
-
-  var app = builder.Build();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
+            )
+        };
+    });
+var app = builder.Build();
 app.UseDeveloperExceptionPage();
 if (app.Environment.IsDevelopment())
 {
@@ -77,7 +94,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

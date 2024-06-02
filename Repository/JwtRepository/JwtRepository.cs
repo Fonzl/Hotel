@@ -14,7 +14,7 @@ public class JwtRepository(IConfiguration configuration) : IJwtRepository
     private const int EXPIRATION_MINUTES = 1;
     private readonly IConfiguration _configuration = configuration;
 
-    private const string KEY = "8b0fa5c39bcc9d22a9d4c8d42ba40fd73c85488b4c43d74b1b26122fe4301700";
+    private const string KEY = "JQ=F_&?VovVs#9y|K/%>AYh-r%FN'b,zj9:X%a*LIDv6d;L2ls'T!I-:^>c_EK:{TL\\lEx";
     private const string ISSUER = "webhotel.lan";
     private const string AUDIENCE = "webhotel.lan";
     private const string SUBJECT = "JWT for webhotel.lan";

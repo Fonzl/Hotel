@@ -8,7 +8,7 @@ namespace DTO.HotelRoomDto
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public int NumberOfBeds { get; set; }
+        public long NumberOfBeds { get; set; }
         public string Info { get; set; }
         public long PricePerNight { get; set; }
         public long HotelId { get; set; }
