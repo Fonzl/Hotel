@@ -3,12 +3,13 @@ using DTO.CountryDto;
 using DTO.HotelDto;
 using Microsoft.AspNetCore.Mvc;
 using Service.ServiceHotel;
+using Service.ServiceHotelRoom;
 
 namespace WebHotel.Controllers
 {
     [ApiController]
     [Route("hotel")]
-    public class HotelController(IServiceHotel hotelService) : Controller
+    public class HotelController(IServiceHotel hotelService,IServiceHotelRoom serviceHotelRoom) : Controller
     {
         [HttpGet]
         public JsonResult GetHotels()
@@ -18,10 +19,12 @@ namespace WebHotel.Controllers
         }
         [Route("{id}")]
         [HttpGet]
-        public JsonResult PostHotel(long id)
+        public  JsonResult PostHotel(long id)
         {
             var hotel = hotelService.GetHotel(id);
+           
             return Json(hotel);
+            
         }
         [Route("create")]
         [HttpPost]

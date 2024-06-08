@@ -2,7 +2,10 @@
 
 using Data;
 using DTO.HotelDto;
+using DTO.HotelRoomDto;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Repository.RepositoryHotel
 {
@@ -11,21 +14,45 @@ namespace Repository.RepositoryHotel
         {
             private readonly ApplicationContext _context = context;
             private DbSet<Hotel> _hotels = context.Set<Hotel>();
+            private DbSet<HotelRoom> _hotelrooms = context.Set<HotelRoom>();
 
-            public HotelDto Get(long id)
+
+        public HotelDto Get(long id)
             {
-                var hotel = _hotels.SingleOrDefault(x => x.Id == id);
-                if (hotel == null) return null;
-                HotelDto hotelDto = new HotelDto()
+                var hotel = _hotels.Include( x => x.HotelRooms).SingleOrDefault(x => x.Id == id);
+            if (hotel == null) return null;
+            return new HotelDto
+            {
+                Id = hotel.Id,
+                Name = hotel.Name,
+                Info = hotel.Info,
+                Stars = hotel.Stars,
+                Address = hotel.Address,
+                HotelRooms = hotel.HotelRooms.Select(r => new HotelRoomDto
                 {
-                    Id = hotel.Id,
-                    Name = hotel.Name,
-                    Info = hotel.Info,
-                    Stars = hotel.Stars,
-                    Address = hotel.Address,
-                    
-                };
-                return hotelDto;
+                    Id = r.Id,
+                    Name = r.Name,
+                    NumberOfBeds = r.NumberOfBeds,
+                    PricePerNight = r.PricePerNight
+                }).ToList()
+
+
+            };
+
+                
+           
+                //if (hotel == null) return null;
+                //HotelDto hotelDto = new HotelDto()
+                //{
+                //    Id = hotel.Id,
+                //    Name = hotel.Name,
+                //    Info = hotel.Info,
+                //    Stars = hotel.Stars,
+                //    Address = hotel.Address,
+
+
+            //};
+            //return hotelDto;
 
             }
 
@@ -54,6 +81,9 @@ namespace Repository.RepositoryHotel
                     Info = dto.Info,
                     Stars = dto.Stars,
                     Address = dto.Address,
+                    CityId = dto.CityID,
+                    HotelСhainId = dto.HotelСhainId
+                    
                 };
                 _hotels.Add(hotel);
                 context.SaveChanges();
@@ -67,7 +97,8 @@ namespace Repository.RepositoryHotel
                 hotel.Info = dto.Info;
                 hotel.Stars = dto.Stars;
                 hotel.Address = dto.Address;
-
+                hotel.CityId = dto.CityID;
+                hotel.HotelСhainId = dto.HotelСhainId;
                 _hotels.Update(hotel);
                 context.SaveChanges();
 

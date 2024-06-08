@@ -12,6 +12,7 @@ namespace Repository.RepositoryHotelRoom
     {
         HotelRoomDto Get(long id);
         List<HotelRoomDto> GetAll();
+        List<HotelRoomDto> GetAllHotelRooms(long id);
         void Insert(CreateHotelRoomDto dto);
         void Update(UpdateHotelRoomDto dto);
         void Delete(long id);

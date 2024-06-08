@@ -5,7 +5,7 @@ using Service.ServiceCountry;
 namespace WebHotel.Controllers;
 
 [ApiController]
-[Route ("countrs")]
+[Route ("countries")]
 
 public class CountryController(ICountryService countryService) : Controller
 {

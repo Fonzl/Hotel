@@ -18,6 +18,8 @@ public class CityRepository(ApplicationContext context) : ICityRepository
             Id = сity.Id,
             Name = сity.Name,
             Info = сity.Info
+            
+            
         };
         return сityDto;
 
@@ -45,7 +47,8 @@ public class CityRepository(ApplicationContext context) : ICityRepository
         {
       
             Name = dto.Name,
-            Info = dto.Info
+            Info = dto.Info,
+            CountryId = dto.CountryId,
         };
         _cities.Add(city);
         context.SaveChanges();
@@ -57,6 +60,7 @@ public class CityRepository(ApplicationContext context) : ICityRepository
        
         city.Name = dto.Name;
         city.Info = dto.Info;
+        city.CountryId = dto.CountryId;
        
         _cities.Update(city);
         context.SaveChanges();

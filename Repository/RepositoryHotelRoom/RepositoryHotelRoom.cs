@@ -9,6 +9,7 @@ namespace Repository.RepositoryHotelRoom
     {
         private readonly ApplicationContext _context = context;
         private DbSet<HotelRoom> _hotelrooms = context.Set<HotelRoom>();
+     
 
         public HotelRoomDto Get(long id)
         {
@@ -20,7 +21,9 @@ namespace Repository.RepositoryHotelRoom
                 Name = room.Name,
                 Info = room.Info,
                 NumberOfBeds = room.NumberOfBeds,
-                PricePerNight = room.PricePerNight
+                PricePerNight = room.PricePerNight,
+                TypeOfNumberId = room.TypeOfNumberId,
+                HotelId = room.HotelId,
             };
             return hotelRoom;
 
@@ -36,7 +39,8 @@ namespace Repository.RepositoryHotelRoom
                     Id = hotelRoom.Id,
                     Name = hotelRoom.Name,
                     NumberOfBeds = hotelRoom.NumberOfBeds,
-                    PricePerNight = hotelRoom.PricePerNight
+                    PricePerNight = hotelRoom.PricePerNight,
+                    TypeOfNumberId = hotelRoom.TypeOfNumberId
                 }); 
             }
             return hotelRoomsdto;
@@ -48,7 +52,10 @@ namespace Repository.RepositoryHotelRoom
                 Name = dto.Name,
                 Info = dto.Info,
                 NumberOfBeds = dto.NumberOfBeds,
-                PricePerNight = dto.PricePerNight
+                PricePerNight = dto.PricePerNight,
+                HotelId = dto.HotelId,
+                TypeOfNumberId = dto.TypeOfNumberId
+                
             };
             _hotelrooms.Add(hotelroom);
             context.SaveChanges();
@@ -78,6 +85,25 @@ namespace Repository.RepositoryHotelRoom
         public void SaveChanges()
         {
             context.SaveChanges();
+        }
+
+        public List<HotelRoomDto> GetAllHotelRooms(long id)
+        {
+            var HotelRooms = _hotelrooms.Where( x => x.HotelId == id);
+            if (HotelRooms == null) return null;
+            List<HotelRoomDto> hotelRoomsdto = new List<HotelRoomDto>();
+            foreach (var hotelRoom in HotelRooms)
+            {
+                hotelRoomsdto.Add(new HotelRoomDto
+                {
+                    Id = hotelRoom.Id,
+                    Name = hotelRoom.Name,
+                    NumberOfBeds = hotelRoom.NumberOfBeds,
+                    PricePerNight = hotelRoom.PricePerNight,
+                    TypeOfNumberId = hotelRoom.TypeOfNumberId
+                });
+            }
+            return hotelRoomsdto;
         }
     }
 }

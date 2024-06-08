@@ -13,6 +13,7 @@ namespace Service.ServiceHotelRoom
 
         HotelRoomDto GetHotelRoom(long id);
         List<HotelRoomDto> GetHotelRooms();
+        List<HotelRoomDto> GetAllHotelRooms(long id);
         void InsertHotelRoom(CreateHotelRoomDto dto);
         void UpdateHotelRoom(UpdateHotelRoomDto dto);
         void DeleteHotelRoom(long id);

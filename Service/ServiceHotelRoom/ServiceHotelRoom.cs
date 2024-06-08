@@ -30,5 +30,10 @@ namespace Service.ServiceHotelRoom
         {
             _repositoryHotelRoom.Delete(id);
         }
+
+        public List<HotelRoomDto> GetAllHotelRooms(long id)
+        {
+            return _repositoryHotelRoom.GetAllHotelRooms(id);
+        }
     }
 }
