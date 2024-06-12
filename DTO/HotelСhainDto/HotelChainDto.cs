@@ -12,7 +12,7 @@ namespace DTO.HotelСhainDto
         public long Id { get; set; }
         public string Name { get; set; }
         public string OwnerName { get; set; }
-        public List<HotelDto.HotelDto> Hotel { get; set; }
+        public List<HotelDto.HotelDetailDto> Hotel { get; set; }
 
     }
 }

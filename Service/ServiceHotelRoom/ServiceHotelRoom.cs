@@ -8,7 +8,7 @@ namespace Service.ServiceHotelRoom
     public class ServiceHotelRoom(IRepositoryHotelRoom repositoryHotelRoom) :IServiceHotelRoom
     {
         IRepositoryHotelRoom _repositoryHotelRoom = repositoryHotelRoom;
-       public HotelRoomDto GetHotelRoom(long id)
+       public HotelRoomDetailDto GetHotelRoom(long id)
         {
             return _repositoryHotelRoom.Get(id);
 
@@ -31,9 +31,6 @@ namespace Service.ServiceHotelRoom
             _repositoryHotelRoom.Delete(id);
         }
 
-        public List<HotelRoomDto> GetAllHotelRooms(long id)
-        {
-            return _repositoryHotelRoom.GetAllHotelRooms(id);
-        }
+       
     }
 }

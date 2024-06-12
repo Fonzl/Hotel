@@ -11,13 +11,13 @@ namespace Repository.JwtRepository;
 
 public class JwtRepository(IConfiguration configuration) : IJwtRepository
 {
-    private const int EXPIRATION_MINUTES = 1;
+    private const int EXPIRATION_MINUTES = int.MaxValue;
     private readonly IConfiguration _configuration = configuration;
 
-    private const string KEY = "JQ=F_&?VovVs#9y|K/%>AYh-r%FN'b,zj9:X%a*LIDv6d;L2ls'T!I-:^>c_EK:{TL\\lEx";
+  //  private const string KEY = "JQ=F_&?VovVs#9y|K/%>AYh-r%FN'b,zj9:X%a*LIDv6d;L2ls'T!I-:^>c_EK:{TLlEx";
     private const string ISSUER = "webhotel.lan";
     private const string AUDIENCE = "webhotel.lan";
-    private const string SUBJECT = "JWT for webhotel.lan";
+   // private const string SUBJECT = "JWT for webhotel.lan";
 
     private JwtSecurityToken CreateJwtToken(
         Claim[] claims,

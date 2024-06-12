@@ -1,19 +1,17 @@
-﻿
-
-using Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DTO.HotelRoomDto
 {
-    public class HotelRoomDto
+   public class HotelRoomDto
     {
         public long Id { get; set; }
         public string Name { get; set; }
         public long NumberOfBeds { get; set; }
-        public string Info { get; set; }
         public long PricePerNight { get; set; }
-        public long HotelId { get; set; }
-        public HotelDto.HotelDto Hotel { get; set; }
         public long TypeOfNumberId { get; set; }
-        public TypeOfNumberDto.TypeOfNumberDto TypeOfNumber { get; set; }
     }
 }

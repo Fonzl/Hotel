@@ -11,9 +11,8 @@ namespace Service.ServiceHotelRoom
     public interface IServiceHotelRoom
     {
 
-        HotelRoomDto GetHotelRoom(long id);
+        HotelRoomDetailDto GetHotelRoom(long id);
         List<HotelRoomDto> GetHotelRooms();
-        List<HotelRoomDto> GetAllHotelRooms(long id);
         void InsertHotelRoom(CreateHotelRoomDto dto);
         void UpdateHotelRoom(UpdateHotelRoomDto dto);
         void DeleteHotelRoom(long id);

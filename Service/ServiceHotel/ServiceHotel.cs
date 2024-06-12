@@ -8,7 +8,7 @@ namespace Service.ServiceHotel
     public class ServiceHotel(IRepositoryHotel hotelRepository) : IServiceHotel
     {
         private IRepositoryHotel _hotelRepository = hotelRepository;
-       public HotelDto GetHotel(long id)
+       public HotelDetailDto GetHotel(long id)
         {
             return _hotelRepository.Get(id);
         }

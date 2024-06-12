@@ -17,23 +17,26 @@ namespace Repository.RepositoryHotel
             private DbSet<HotelRoom> _hotelrooms = context.Set<HotelRoom>();
 
 
-        public HotelDto Get(long id)
+        public HotelDetailDto Get(long id)
             {
                 var hotel = _hotels.Include( x => x.HotelRooms).SingleOrDefault(x => x.Id == id);
             if (hotel == null) return null;
-            return new HotelDto
+            return new HotelDetailDto
             {
                 Id = hotel.Id,
                 Name = hotel.Name,
                 Info = hotel.Info,
                 Stars = hotel.Stars,
                 Address = hotel.Address,
+                CityID = hotel.CityId,
+                HotelСhainId = hotel.HotelСhainId,
                 HotelRooms = hotel.HotelRooms.Select(r => new HotelRoomDto
                 {
                     Id = r.Id,
                     Name = r.Name,
                     NumberOfBeds = r.NumberOfBeds,
-                    PricePerNight = r.PricePerNight
+                    PricePerNight = r.PricePerNight,
+                    TypeOfNumberId = r.TypeOfNumberId,
                 }).ToList()
 
 

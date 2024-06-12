@@ -9,7 +9,7 @@ namespace Service.ServiceHotel
 {
     public interface IServiceHotel
     {
-        HotelDto GetHotel(long id);
+        HotelDetailDto GetHotel(long id);
         List<HotelDto> GetHotels();
         void InsertHotel(CreateHotelDto dto);
         void UpdateHotel(UpdateHotelDto dto);

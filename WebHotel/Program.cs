@@ -22,6 +22,7 @@ using WebHotel;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Service.JWT_TokenService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +60,7 @@ builder.Services.AddTransient<IServiceTypeOfNumber, ServiceTypeOfNumber>();
 builder.Services.AddScoped(typeof(IRepositoryUser), typeof(RepositoryUser));
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IJwtRepository), typeof(JwtRepository));
+builder.Services.AddTransient<IjwtService, jwtService>();
 
 builder.Services.AddIdentityCore<IdentityUser>(options =>
 {
@@ -86,6 +88,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             )
         };
     });
+Console.WriteLine(builder.Configuration["Jwt:Key"]);
+builder.Services.AddAuthorization();
 var app = builder.Build();
 app.UseDeveloperExceptionPage();
 if (app.Environment.IsDevelopment())

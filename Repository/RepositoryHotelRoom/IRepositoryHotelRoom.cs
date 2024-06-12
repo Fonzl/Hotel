@@ -10,9 +10,8 @@ namespace Repository.RepositoryHotelRoom
 {
     public interface IRepositoryHotelRoom
     {
-        HotelRoomDto Get(long id);
+        HotelRoomDetailDto Get(long id);
         List<HotelRoomDto> GetAll();
-        List<HotelRoomDto> GetAllHotelRooms(long id);
         void Insert(CreateHotelRoomDto dto);
         void Update(UpdateHotelRoomDto dto);
         void Delete(long id);

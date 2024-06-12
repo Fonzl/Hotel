@@ -11,11 +11,11 @@ namespace Repository.RepositoryHotelRoom
         private DbSet<HotelRoom> _hotelrooms = context.Set<HotelRoom>();
      
 
-        public HotelRoomDto Get(long id)
+        public HotelRoomDetailDto Get(long id)
         {
             var room = _hotelrooms.SingleOrDefault(x => x.Id == id);
             if (room == null) return null;
-            HotelRoomDto hotelRoom = new HotelRoomDto()
+            HotelRoomDetailDto hotelRoom = new HotelRoomDetailDto()
             {
                 Id = room.Id,
                 Name = room.Name,

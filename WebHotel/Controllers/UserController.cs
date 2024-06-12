@@ -1,34 +1,30 @@
 using DTO.AuthDto;
 using DTO.UserDto;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Repository.JwtRepository;
 using Service.UserService;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using Service.JWT_TokenService;
 using WebHotel;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace BookAppAPI.Controllers;
 
 [ApiController]
 [Route("users")]
-public class UserController(IUserService userService, IJwtRepository jwtRepository, UserManager<IdentityUser> userManager) : Controller
+public class UserController(IUserService userService, IjwtService jwtService, UserManager<IdentityUser> userManager) : Controller
 {
     private readonly UserManager<IdentityUser> _userManager = userManager;
 
-  
+   // [Authorize]
     [HttpGet]
     public async Task<JsonResult> GetUsers()
     {
         var users = await userService.GetUsers();
         return Json(users);
     }
+   // [Authorize]
     [Route ("{username}")]
     [HttpGet]
     public async Task<JsonResult?> GetUser(string username)
@@ -53,7 +49,7 @@ public class UserController(IUserService userService, IJwtRepository jwtReposito
         if (!ModelState.IsValid)
         {
             return BadRequest("Bad credentials");
-        }
+        } 
         var user = await _userManager.FindByNameAsync(authSignInDto.UserName);
         if (user == null)
         {
@@ -65,7 +61,7 @@ public class UserController(IUserService userService, IJwtRepository jwtReposito
         {
             return BadRequest("Bad credentials");
         }
-        var token = jwtRepository.CreateToken(user);
+        var token = jwtService.CreateToken(user);
         return Ok(token);
     }
     //[Authorize]

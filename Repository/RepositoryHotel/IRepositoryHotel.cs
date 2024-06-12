@@ -5,7 +5,7 @@ namespace Repository.RepositoryHotel
 {
     public interface IRepositoryHotel
     {
-        HotelDto Get(long id);
+        HotelDetailDto Get(long id);
         List<HotelDto> GetAll();
         void Insert(CreateHotelDto dto);
         void Update(UpdateHotelDto dto);
