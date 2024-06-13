@@ -1,5 +1,6 @@
 ﻿
 using DTO.HotelСhainDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.ServiceHotelChain;
 
@@ -22,6 +23,7 @@ namespace WebHotel.Controllers
             var hotelchain = serviceHotelChain.GetHotelChain(id);
             return Json(hotelchain);
         }
+        [Authorize]
         [Route("create")]
         [HttpPost]
         public JsonResult CreateHotelChain(CreateHotelChainDto dto)
@@ -29,6 +31,7 @@ namespace WebHotel.Controllers
             serviceHotelChain.InsertHotelChain(dto);
             return Json("created");
         }
+        [Authorize]
         [Route("update")]
         [HttpPatch]
         public JsonResult UpdateHotelChain(UpdateHotelChainDto dto)
@@ -37,6 +40,7 @@ namespace WebHotel.Controllers
 
             return Json("updated");
         }
+        [Authorize]
         [Route("delete/{id}")]
         [HttpDelete]
         public JsonResult DeleteHotelChain(long id)

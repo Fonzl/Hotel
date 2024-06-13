@@ -1,4 +1,5 @@
 ﻿using DTO.TypeOfNumberDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.ServiceTypeOfNumber;
 
@@ -21,6 +22,7 @@ namespace WebHotel.Controllers
             var type = serviceTypeOfNumber.GetTypeOfNumber(id);
             return Json(type);
         }
+        [Authorize]
         [Route("create")]
         [HttpPost]
         public JsonResult CreateTypeOfNumber(CreateTypeOfNumberDto dto)
@@ -28,6 +30,7 @@ namespace WebHotel.Controllers
             serviceTypeOfNumber.InsertTypeOfNumber(dto);
             return Json("created");
         }
+        [Authorize]
         [Route("update")]
         [HttpPatch]
         public JsonResult UpdateTypeOfNumber(UpdateTypeOfNumberDto dto)
@@ -36,6 +39,7 @@ namespace WebHotel.Controllers
 
             return Json("updated");
         }
+        [Authorize]
         [Route("delete/{id}")]
         [HttpDelete]
         public JsonResult DeleteTypeOfNumber(long id)

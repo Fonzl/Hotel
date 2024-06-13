@@ -13,18 +13,18 @@ namespace BookAppAPI.Controllers;
 
 [ApiController]
 [Route("users")]
-public class UserController(IUserService userService, IjwtService jwtService, UserManager<IdentityUser> userManager) : Controller
+public class UserController(IUserService userService) : Controller
 {
-    private readonly UserManager<IdentityUser> _userManager = userManager;
+ 
 
-   // [Authorize]
+    [Authorize]
     [HttpGet]
     public async Task<JsonResult> GetUsers()
     {
         var users = await userService.GetUsers();
         return Json(users);
     }
-   // [Authorize]
+    [Authorize]
     [Route ("{username}")]
     [HttpGet]
     public async Task<JsonResult?> GetUser(string username)
@@ -41,29 +41,6 @@ public class UserController(IUserService userService, IjwtService jwtService, Us
         return Json(result);
     }
 
-    [Route("CreateToken")]
-    [HttpPost]
-    public async Task<ActionResult<AuthSignInResponse>> CreatToken(AuthSignInDto authSignInDto)
-    {
-       
-        if (!ModelState.IsValid)
-        {
-            return BadRequest("Bad credentials");
-        } 
-        var user = await _userManager.FindByNameAsync(authSignInDto.UserName);
-        if (user == null)
-        {
-            return BadRequest("Bad credentials");
-        }
-        var isPasswordValid = await _userManager.CheckPasswordAsync(user, authSignInDto.Password);
-
-        if (!isPasswordValid)
-        {
-            return BadRequest("Bad credentials");
-        }
-        var token = jwtService.CreateToken(user);
-        return Ok(token);
-    }
     //[Authorize]
     //[HttpGet]
     //public async Task<ActionResult<IEnumerable<BodyType>>> GetBodyTypes()

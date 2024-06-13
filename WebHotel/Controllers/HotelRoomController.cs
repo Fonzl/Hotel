@@ -1,5 +1,6 @@
 ﻿
 using DTO.HotelRoomDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.ServiceHotelRoom;
 
@@ -22,6 +23,7 @@ namespace WebHotel.Controllers
             var hotelroom = serviceHotelRoom.GetHotelRoom(id);
             return Json(hotelroom);
         }
+        [Authorize]
         [Route("create")]
         [HttpPost]
         public JsonResult CreateHotelRoom(CreateHotelRoomDto dto)
@@ -29,6 +31,7 @@ namespace WebHotel.Controllers
             serviceHotelRoom.InsertHotelRoom(dto);
             return Json("created");
         }
+        [Authorize]
         [Route("update")]
         [HttpPatch]
         public JsonResult UpdateHotelRoom(UpdateHotelRoomDto dto)
@@ -37,6 +40,7 @@ namespace WebHotel.Controllers
 
             return Json("updated");
         }
+        [Authorize]
         [Route("delete/{id}")]
         [HttpDelete]
         public JsonResult DeleteHotelRoom(long id)

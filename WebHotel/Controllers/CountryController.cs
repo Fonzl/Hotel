@@ -1,4 +1,5 @@
 ﻿using DTO.CountryDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.ServiceCountry;
 
@@ -21,6 +22,7 @@ public class CountryController(ICountryService countryService) : Controller
     { var country = countryService.GetCountry(id);
     return Json(country);
     }
+    [Authorize]
     [Route ("created")]
     [HttpPost]
     public JsonResult CreateCountry(CreateCountryDto dto )
@@ -28,6 +30,7 @@ public class CountryController(ICountryService countryService) : Controller
         countryService.InsertCountry(dto);
         return Json(dto);
     }
+    [Authorize]
     [Route("update")]
     [HttpPatch]
     public JsonResult UpdateCountry(UpdateCountryDto dto)
@@ -36,6 +39,7 @@ public class CountryController(ICountryService countryService) : Controller
 
         return Json("updated");
     }
+    [Authorize]
     [Route("delete/{id}")]
     [HttpDelete]
     public JsonResult DeleteCountry(long id)

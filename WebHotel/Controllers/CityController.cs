@@ -1,4 +1,5 @@
 ﻿using DTO.CityDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.ServiceCity;
 
@@ -22,6 +23,7 @@ public class CityController(ICityService cityService) : Controller
     { var city = cityService.GetCity(id);
     return Json(city);
     }
+    [Authorize]
     [Route ("created")]
     [HttpPost]
     public JsonResult CreateCity(CreateCityDto dto )
@@ -29,6 +31,7 @@ public class CityController(ICityService cityService) : Controller
         cityService.InsertCity(dto);
         return Json(dto);
     }
+    [Authorize]
     [Route("update")]
     [HttpPatch]
     public JsonResult UpdateCity(UpdateCityDto dto)
@@ -37,6 +40,7 @@ public class CityController(ICityService cityService) : Controller
 
         return Json("updated");
     }
+    [Authorize]
     [Route("delete/{id}")]
     [HttpDelete]
     public JsonResult DeleteCity(long id)
