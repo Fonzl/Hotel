@@ -69,7 +69,7 @@ public class JwtRepository(UserManager<IdentityUser> userManager) : IJwtReposito
     
     private const int EXPIRATION_MINUTES = 60;
 
-    private const string KEY = "8b0fa5c39bcc9d22a9d4c8d42ba40fd73c85488b4c43d74b1b26122fe4301700";
+    private const string KEY = "JQ=F_&?VovVs#9y|K/%>AYh-r%FN'b,zj9:X%a*LIDv6d;L2ls'T!I-:^>c_EK:{TLlEx";
     private const string ISSUER = "bookapilan";
     private const string AUDIENCE = "bookapilan";
     private const string SUBJECT = "JWT for bookapi.lan";

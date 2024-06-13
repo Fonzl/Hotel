@@ -87,38 +87,11 @@ builder.Services.AddTransient<IjwtService, jwtService>();
 ////            ValidateIssuerSigningKey = true
 ////        };
 ////    });
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(options =>
-//    {
-//        options.UseSecurityTokenValidators = true;
-//        options.TokenValidationParameters = new TokenValidationParameters()
-//        {
-//            ValidateIssuer = true,
-//            ValidateAudience = true,
-//            ValidateLifetime = true,
-//            ValidateIssuerSigningKey = true,
-//            ValidAudience = "webhotel.la",
-//            ValidIssuer = "webhotel.lan",
-//            IssuerSigningKey = new SymmetricSecurityKey(
-//                Encoding.UTF8.GetBytes("/.]aDuc@{!B'>pZ&cXvnvt*;uD0+}7K7Z^B|bE_>oO]PE_ON[9:DVd=OgPMy"))
-//        };
-//    });
+
 
 //builder.Services.AddAuthorization();
 //var app = builder.Build();
-//app.UseDeveloperExceptionPage();
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
-//app.UseHttpsRedirection();
-//app.UseAuthentication();
-//app.UseAuthorization();
 
-//app.MapControllers();
-
-//app.Run();
 builder.Services.AddIdentityCore<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -143,22 +116,53 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = "bookapilan",
             ValidIssuer = "bookapilan",
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("8b0fa5c39bcc9d22a9d4c8d42ba40fd73c85488b4c43d74b1b26122fe4301700"))
+                Encoding.UTF8.GetBytes("JQ=F_&?VovVs#9y|K/%>AYh-r%FN'b,zj9:X%a*LIDv6d;L2ls'T!I-:^>c_EK:{TLlEx"))
         };
     });
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.UseSecurityTokenValidators = true;
+//        options.TokenValidationParameters = new TokenValidationParameters()
+//        {
+//            ValidateIssuer = true,
+//            ValidateAudience = true,
+//            ValidateLifetime = true,
+//            ValidateIssuerSigningKey = true,
+
+//            ValidAudience = "bookapilan",
+//            ValidIssuer = "bookapilan",
+//            IssuerSigningKey = new SymmetricSecurityKey(
+//                Encoding.UTF8.GetBytes("JQ=F_&?VovVs#9y|K/%>AYh-r%FN'b,zj9:X%a*LIDv6d;L2ls'T!I-:^>c_EK:{TLlEx"))
+
+//        };
+//    });
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+
+//app.UseAuthentication();
+//app.UseAuthorization();
+//app.UseHttpsRedirection();
+//app.MapControllers();
+//app.Run();
+app.UseDeveloperExceptionPage();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseHttpsRedirection();
+
 app.MapControllers();
+
 app.Run();
