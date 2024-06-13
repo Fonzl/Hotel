@@ -11,6 +11,6 @@ namespace Service.JWT_TokenService
 {
     public interface IjwtService
     {
-        AuthSignInResponse CreateToken(IdentityUser user);
+        Task<AuthSignInResponse> CreateToken(AuthSignInDto user);
     }
 }

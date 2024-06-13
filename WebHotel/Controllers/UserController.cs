@@ -17,7 +17,7 @@ public class UserController(IUserService userService, IjwtService jwtService, Us
 {
     private readonly UserManager<IdentityUser> _userManager = userManager;
 
-   // [Authorize]
+    [Authorize]
     [HttpGet]
     public async Task<JsonResult> GetUsers()
     {
@@ -43,26 +43,12 @@ public class UserController(IUserService userService, IjwtService jwtService, Us
 
     [Route("CreateToken")]
     [HttpPost]
-    public async Task<ActionResult<AuthSignInResponse>> CreatToken(AuthSignInDto authSignInDto)
+    public async Task<ActionResult<AuthSignInResponse>> CreatToken(AuthSignInDto dto)
     {
-       
-        if (!ModelState.IsValid)
-        {
-            return BadRequest("Bad credentials");
-        } 
-        var user = await _userManager.FindByNameAsync(authSignInDto.UserName);
-        if (user == null)
-        {
-            return BadRequest("Bad credentials");
-        }
-        var isPasswordValid = await _userManager.CheckPasswordAsync(user, authSignInDto.Password);
-
-        if (!isPasswordValid)
-        {
-            return BadRequest("Bad credentials");
-        }
-        var token = jwtService.CreateToken(user);
-        return Ok(token);
+        var authData = await jwtService.CreateToken(dto);
+        
+        if (authData == null) return Json("Пользователь не найден или введен неверный пароль");
+        return Json(authData);
     }
     //[Authorize]
     //[HttpGet]

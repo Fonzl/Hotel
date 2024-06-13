@@ -15,8 +15,8 @@ namespace Service.JWT_TokenService
 {
     public class jwtService(IJwtRepository jwtRepository) : IjwtService
     {
-        private IJwtRepository _jwtRepository = jwtRepository;
-        public AuthSignInResponse CreateToken(IdentityUser user)
+      
+        public Task<AuthSignInResponse> CreateToken(AuthSignInDto user)
         {
             return jwtRepository.CreateToken(user);
         }

@@ -18,11 +18,11 @@ using Repository.RepositoryUser;
 using Repository.JwtRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using WebHotel;
-using Microsoft.Extensions.Configuration;
 using System.Text;
-using Microsoft.Extensions.Configuration;
 using Service.JWT_TokenService;
+using WebHotel;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +62,63 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IJwtRepository), typeof(JwtRepository));
 builder.Services.AddTransient<IjwtService, jwtService>();
 
+//builder.Services.AddIdentityCore<IdentityUser>(options =>
+//{
+//    options.SignIn.RequireConfirmedAccount = false;
+//    options.User.RequireUniqueEmail = true;
+//    options.Password.RequireDigit = false;
+//    options.Password.RequiredLength = 6;
+//    options.Password.RequireNonAlphanumeric = false;
+//    options.Password.RequireLowercase = false;
+//    options.Password.RequireUppercase = false;
+//}).AddEntityFrameworkStores<ApplicationContext>();
+
+////builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+////    .AddJwtBearer(options =>
+////    {
+////        options.TokenValidationParameters = new TokenValidationParameters()
+////        {
+////            ValidateIssuer = true,
+////            ValidateAudience = true,
+////            ValidIssuer = AuthOptions.ISSUER,
+////            ValidAudience = AuthOptions.AUDIENCE,
+////            ValidateLifetime = true,
+////            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AuthOptions.KEY)),
+////            ValidateIssuerSigningKey = true
+////        };
+////    });
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.UseSecurityTokenValidators = true;
+//        options.TokenValidationParameters = new TokenValidationParameters()
+//        {
+//            ValidateIssuer = true,
+//            ValidateAudience = true,
+//            ValidateLifetime = true,
+//            ValidateIssuerSigningKey = true,
+//            ValidAudience = "webhotel.la",
+//            ValidIssuer = "webhotel.lan",
+//            IssuerSigningKey = new SymmetricSecurityKey(
+//                Encoding.UTF8.GetBytes("/.]aDuc@{!B'>pZ&cXvnvt*;uD0+}7K7Z^B|bE_>oO]PE_ON[9:DVd=OgPMy"))
+//        };
+//    });
+
+//builder.Services.AddAuthorization();
+//var app = builder.Build();
+//app.UseDeveloperExceptionPage();
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+//app.UseHttpsRedirection();
+//app.UseAuthentication();
+//app.UseAuthorization();
+
+//app.MapControllers();
+
+//app.Run();
 builder.Services.AddIdentityCore<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -72,35 +129,36 @@ builder.Services.AddIdentityCore<IdentityUser>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<ApplicationContext>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        options.UseSecurityTokenValidators = true;
         options.TokenValidationParameters = new TokenValidationParameters()
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = "bookapilan",
+            ValidIssuer = "bookapilan",
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
-            )
+                Encoding.UTF8.GetBytes("8b0fa5c39bcc9d22a9d4c8d42ba40fd73c85488b4c43d74b1b26122fe4301700"))
         };
     });
-Console.WriteLine(builder.Configuration["Jwt:Key"]);
-builder.Services.AddAuthorization();
+
 var app = builder.Build();
-app.UseDeveloperExceptionPage();
+
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseHttpsRedirection();
+
+
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseHttpsRedirection();
 app.MapControllers();
-
 app.Run();
