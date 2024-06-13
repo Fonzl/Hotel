@@ -24,7 +24,7 @@ public class UserController(IUserService userService) : Controller
         var users = await userService.GetUsers();
         return Json(users);
     }
-   // [Authorize]
+    [Authorize]
     [Route ("{username}")]
     [HttpGet]
     public async Task<JsonResult?> GetUser(string username)

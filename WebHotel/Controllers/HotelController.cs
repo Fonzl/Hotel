@@ -1,6 +1,7 @@
 ﻿
 using DTO.CountryDto;
 using DTO.HotelDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.ServiceHotel;
 using Service.ServiceHotelRoom;
@@ -26,6 +27,7 @@ namespace WebHotel.Controllers
             return Json(hotel);
             
         }
+        [Authorize]
         [Route("create")]
         [HttpPost]
         public JsonResult CreateHotel(CreateHotelDto dto)
@@ -33,6 +35,7 @@ namespace WebHotel.Controllers
             hotelService.InsertHotel(dto);
             return Json("created");
         }
+        [Authorize]
         [Route("update")]
         [HttpPatch]
         public JsonResult UpdateHotel(UpdateHotelDto dto)
@@ -41,6 +44,7 @@ namespace WebHotel.Controllers
 
             return Json("updated");
         }
+        [Authorize]
         [Route("delete/{id}")]
         [HttpDelete]
         public JsonResult DeleteHotel(long id)
